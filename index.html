@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roshd Academy | Online Classes for Afghan Girls</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Supabase Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="logo-container">
+            <img src="logo.jpg" alt="Roshd Academy Logo" class="site-logo">
+            <span class="logo-text">Roshd Academy 🌱</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#courses">Classes</a></li>
+                <li><a href="#team">Our Team</a></li>
+                <li><a href="#comments">Reviews</a></li>
+                <li><a href="#footer">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Banner Section with Top Bar -->
+    <section class="hero-banner">
+        <div class="overlay"></div>
+        
+        <!-- نوار بالایی بنر برای لوگو و سرچ (دقیقاً مثل سایت هاروارد) -->
+        <div class="banner-top-bar">
+            <!-- لوگو در گوشه چپ -->
+            <div class="banner-logo-wrapper">
+                <img src="logo.jpg" alt="Roshd Academy Logo" class="banner-logo">
+            </div>
+            
+            <!-- نوار جستجو در گوشه راست -->
+            <div class="banner-search-wrapper">
+                <form action="#courses" method="GET" class="banner-search-form">
+                    <input type="text" placeholder="Search courses..." class="banner-search-input">
+                    <button type="submit" class="banner-search-btn">🔍</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- محتوای اصلی بنر در وسط -->
+        <div class="hero-content">
+            <h1>Roshd Academy</h1>
+            <h2 class="slogan">Seed of Knowledge, Fruit of the Future 🌱</h2>
+            <p>Exclusive, free, and private online learning platform for resilient Afghan girls.</p>
+            <a href="#admission" class="btn">Register Now</a>
+        </div>
+    </section>
+
+    <!-- Online Classes Section with Images -->
+    <section id="courses" class="container">
+        <h2 class="section-title">Our Online Courses</h2>
+        <div class="courses-grid">
+            
+            <!-- 1. English Language (Active) -->
+            <div class="course-card">
+                <div class="course-img-wrapper">
+                    <img src="english.png" alt="English Class">
+                </div>
+                <div class="course-info">
+                    <h3>English Language</h3>
+                    <p>Improve your speaking, listening, and writing skills from beginner to advanced levels.</p>
+                    <div class="card-footer">
+                        <span class="badge private">Active</span>
+                        <a href="#admission" class="btn-sm">Apply</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Computer Skills (Coming Soon) -->
+            <div class="course-card">
+                <div class="course-img-wrapper">
+                    <img src="computer.png" alt="Computer Class">
+                </div>
+                <div class="course-info">
+                    <h3>Computer Skills</h3>
+                    <p>Master essential tools like Word, Excel, and learn how to stay safe on the internet.</p>
+                    <div class="card-footer">
+                        <span class="badge coming-soon">Coming Soon</span>
+                        <button class="btn-sm disabled" disabled>Closed</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Web Development (Coming Soon) -->
+            <div class="course-card">
+                <div class="course-img-wrapper">
+                    <img src="web.png" alt="Web Development Class">
+                </div>
+                <div class="course-info">
+                    <h3>Web Development</h3>
+                    <p>Learn HTML, CSS, and JavaScript from scratch through live interactive sessions.</p>
+                    <div class="card-footer">
+                        <span class="badge coming-soon">Coming Soon</span>
+                        <button class="btn-sm disabled" disabled>Closed</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Student Admission Form Section -->
+    <section id="admission" class="container bg-light">
+        <h2 class="section-title">Online Admission Form</h2>
+        <form id="admission-form">
+            <div class="form-group">
+                <label for="student-name">Full Name:</label>
+                <input type="text" id="student-name" required placeholder="Enter your full name">
+            </div>
+            <div class="form-group">
+                <label for="student-whatsapp">WhatsApp Number:</label>
+                <input type="tel" id="student-whatsapp" required placeholder="e.g. +937XXXXXXXX">
+            </div>
+            <div class="form-group">
+                <label for="student-age">Age:</label>
+                <input type="number" id="student-age" required placeholder="Enter your age">
+            </div>
+            <div class="form-group">
+                <label for="student-course">Select Course:</label>
+                <select id="student-course" required>
+                    <option value="" disabled selected>Choose a course...</option>
+                    <option value="English Language">English Language (Active)</option>
+                    <option value="Computer Skills">Computer Skills (Join Waiting List)</option>
+                    <option value="Web Development">Web Development (Join Waiting List)</option>
+                </select>
+            </div>
+            <button type="submit" class="btn-submit">Submit Registration</button>
+        </form>
+    </section>
+    <!-- Leadership & Team Section -->
+    <section id="team" class="container bg-light">
+        <h2 class="section-title">Chief Executive Officers</h2>
+        <div class="team-grid">
+            
+            <!-- Masuma Mohammad zada -->
+            <div class="team-card">
+                <div class="avatar-wrapper">
+                    <img src="masuma.jpg" alt="Masuma Mohammad zada"> 
+                </div>
+                <h3>Masuma Mohammad zada</h3>
+                <p class="role"> CEO & Director</p>
+            </div>
+
+            <!-- Zohal Taj -->
+            <div class="team-card">
+                <div class="avatar-wrapper">
+                    <img src="zohal.jpg" alt="Zohal Taj">
+                </div>
+                <h3>Zohal Taj</h3>
+                <p class="role"> CEO / English & Computer Instructor</p>
+            </div>
+
+            <!-- Mohadesa Haidari -->
+            <div class="team-card">
+                <div class="avatar-wrapper">
+                    <img src="mohadesa.jpg" alt="Mohadesa Haidari">
+                </div>
+                <h3>Mohadesa Haidari</h3>
+                <p class="role"> CEO & Digital Manager</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="comments" class="container">
+        <h2 class="section-title">Student Reviews</h2>
+        
+        <!-- فرم نظرات آنلاین -->
+        <form id="comment-form">
+            <div class="form-group">
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" required placeholder="Enter your name">
+            </div>
+            <div class="form-group">
+                <label for="message">Your Review or Message:</label>
+                <textarea id="message" rows="5" required placeholder="Write your comment here..."></textarea>
+            </div>
+            <button type="submit" class="btn-submit">Submit Review</button>
+        </form>
+
+        <!-- محل نمایش نظرات به صورت زنده از دیتابیس -->
+        <div class="comments-list" id="comments-container">
+            <!-- نظرات به صورت اتوماتیک توسط جاوااسکریپت اینجا لود می‌شوند -->
+        </div>
+    </section>
+
+    <!-- Footer Section with Active Social Links -->
+    <footer id="footer">
+        <p>All Rights Reserved for Roshd Academy © 2026</p>
+        <p class="footer-slogan">Seed of Knowledge, Fruit of the Future </p>
+        <div class="social-links">
+            <a href="https://whatsapp.com/channel/0029Vb8XPPG4CrfkyMxuSJ0F" target="_blank"> WhatsApp</a>
+            <a href="https://t.me/Academy_Roshd_Af" target="_blank"> Telegram</a>
+            <a href="https://www.instagram.com/rosh_dacademy" target="_blank"> Instagram</a>
+            <a href="https://www.facebook.com/share/1NiR4E3vUy/?mibextid=wwXIfr" target="_blank"> Facebook</a>
+            <a href="mailto:1academyroshd@gmail.com"> Email</a>
+        </div>
+        <p class="developer-credits">Designed by <a href="https://github.com" target="_blank">Mohadesa Haidari</a></p>
+    </footer>
+
+   <!-- کدهای جاوااسکریپت ادغام شده درون HTML -->
+    <script>
+        const SUPABASE_URL = "https://zrwxwkbyqclmgsjdwmup.supabase.co";
+        const SUPABASE_ANON_KEY ="sb_publishable_Nd5Do5kgTtq5-_CjYz8qoA_w-LbrH0g";
+
+        const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // ۱. لود کردن نظرات
+        async function loadReviews() {
+            const container = document.getElementById('comments-container');
+            container.innerHTML = '<p style="text-align:center;">Loading reviews...</p>';
+            const { data: reviews, error } = await supabaseClient.from('reviews').select('*').order('id', { ascending: false });
+            if (error) { container.innerHTML = '<p>Error loading reviews.</p>'; return; }
+            container.innerHTML = '';
+            if (reviews.length === 0) {
+                container.innerHTML = '<div class="comment-item"><h4>Roshd Academy</h4><p>No reviews yet.</p></div>';
+                return;
+            }
+            reviews.forEach(row => {
+                const item = document.createElement('div');
+                item.classList.add("comment-item");
+                item.innerHTML = "<h4>${escapeHTML(row.student_name)}</h4><p>${escapeHTML(row.review_text)}</p>";
+                container.appendChild(item);
+            });
+        }
+
+        // ۲. ثبت نظر جدید
+        document.getElementById("comment-form").addEventListener("submit", async function(e) {
+            e.preventDefault();
+            const nameInput = document.getElementById("name");
+            const messageInput = document.getElementById("message");
+            const name = nameInput.value.trim();
+            const message = messageInput.value.trim();
+            if(!name || !message) return;
+
+            const { error } = await supabaseClient.from("reviews").insert([{ student_name: name, review_text: message }]);
+            if (error) { alert("Error submitting review."); } else { nameInput.value = ""; messageInput.value = ""; loadReviews(); }
+        });
+
+        // ۳. ثبت‌نام آنلاین دانش‌آموز جدید
+        document.getElementById("admission-form").addEventListener("submit", async function(e) {
+            e.preventDefault();
+            const name = document.getElementById("student-name").value.trim();
+            const whatsapp = document.getElementById("student-whatsapp").value.trim();
+            const age = document.getElementById("student-age").value.trim();
+            const course = document.getElementById("student-course").value;
+            const submitBtn = e.target.querySelector(".btn-submit");
+
+            submitBtn.disabled = true;
+            submitBtn.innerText = "Registering...";
+
+            const { error } = await supabaseClient
+                .from("registrations")
+                .insert([{ full_name: name, whatsapp_number: whatsapp, age: parseInt(age), course_name: course }]);
+
+            if (error) {
+                alert("Registration failed. Please try again.");
+                console.error(error);
+            } else {
+                alert("Registration Successful! We will contact you on WhatsApp soon.");
+                document.getElementById("admission-form").reset();
+            }
+            submitBtn.disabled = false;
+            submitBtn.innerText = "Submit Registration";
+        });
+
+        function escapeHTML(str) {
+            return str.replace(/[&<>""]/g, tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag));
+        }
+
+        loadReviews();
+        // ۴. سیستم جستجوی هوشمند صنف‌ها (بدون رفرش شدن صفحه)
+document.querySelector('.banner-search-form').addEventListener('submit', function(e) {
+    e.preventDefault(); // جلوگیری از رفرش شدن صفحه هنگام زدن دکمه سرچ
+});
+
+document.querySelector('.banner-search-input').addEventListener('input', function(e) {
+    const searchText = e.target.value.toLowerCase().trim(); // گرفتن متن تایپ شده و تبدیل به حروف کوچک
+    const courseCards = document.querySelectorAll('.courses-grid .course-card'); // انتخاب تمام کارت‌های صنف‌ها
+    let foundAny = false;
+
+    courseCards.forEach(card => {
+        const courseTitle = card.querySelector('h3').innerText.toLowerCase(); // گرفتن عنوان کلاس
+        const courseDesc = card.querySelector('p').innerText.toLowerCase(); // گرفتن توضیحات کلاس
+
+        // اگر متن سرچ شده در عنوان یا توضیحات کلاس بود، آن را نشان بده، وگرنه مخفی کن
+        if (courseTitle.includes(searchText) || courseDesc.includes(searchText)) {
+            card.style.display = "flex"; // نمایش کارت
+            card.style.opacity = "1";
+            foundAny = true;
+        } else {
+            card.style.display = "none"; // مخفی کردن کارت
+        }
+    });
+
+    // مدیریت پیام "کلاسی پیدا نشد" در صورت نبودن نتیجه
+    let noResultMsg = document.getElementById('no-search-result');
+    if (!foundAny) {
+        if (!noResultMsg) {
+            noResultMsg = document.createElement('p');
+            noResultMsg.id = 'no-search-result';
+            noResultMsg.style.textAlign = 'center';
+            noResultMsg.style.gridColumn = '1 / -1';
+            noResultMsg.style.color = '#64748b';
+            noResultMsg.style.marginTop = '20px';
+            noResultMsg.innerText = 'No courses found matching your search.';
+            document.querySelector('.courses-grid').appendChild(noResultMsg);
+        }
+    } else {
+        if (noResultMsg) {
+            noResultMsg.remove();
+        }
+    }
+});
+    </script>
+</body>
+</html>
+</body>
+</html>   

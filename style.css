@@ -1,0 +1,682 @@
+@import url("https://googleapis.com");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+body {
+    background-color: #f8fafc;
+    color: #0f172a;
+}
+
+.container {
+    padding: 80px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Header & Logo styling */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 50px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.site-logo {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.logo-text {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1e3a8a; /* Navy Blue */
+}
+
+header nav ul {
+    display: flex;
+    list-style: none;
+}
+
+header nav ul li {
+    margin-right: 25px;
+}
+
+header nav ul li a {
+    text-decoration: none;
+    color: #475569;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+header nav ul li a:hover {
+    color: #1e3a8a;
+}
+
+/* Hero Banner with banner.jpg and 50% dark overlay */
+.hero-banner {
+    position: relative;
+    height: 75vh;
+    background-image: url("banner.jpg"); 
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+
+.hero-banner .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(15, 23, 42, 0.5); /* 50% darkness opacity */
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    padding: 20px;
+}
+
+.hero-content h1 {
+    font-size: 52px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.slogan {
+    font-size: 24px;
+    color: #fbbf24; /* Golden Slogan */
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.hero-content p {
+    font-size: 18px;
+    margin-bottom: 30px;
+    color: #f1f5f9;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 35px;
+    background-color: #1e3a8a;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    box-shadow: 0 4px 6px rgba(30, 58, 138, 0.2);
+    transition: all 0.3s;
+}
+
+.btn:hover {
+    background-color: #172554;
+    transform: translateY(-2px);
+}
+
+/* Section titles */
+.section-title {
+    text-align: center;
+    margin-bottom: 50px;
+    color: #1e3a8a;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.section-title::after {
+    content: "";
+    display: block;
+    width: 50px;
+    height: 4px;
+    background-color: #fbbf24; /* Gold accent line */
+    margin: 12px auto 0 auto;
+    border-radius: 2px;
+}
+
+/* Courses Cards */
+.courses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.course-card {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(15, 23, 42, 0.03);
+    position: relative;
+    border-top: 4px solid #1e3a8a;
+    transition: transform 0.3s;
+}
+
+.course-card:hover {
+    transform: translateY(-5px);
+}
+
+.course-card h3 {
+    margin-bottom: 15px;
+    color: #0f172a;
+}
+
+.course-card p {
+    color: #64748b;
+    font-size: 15px;
+    line-height: 1.7;
+    margin-bottom: 25px;
+}
+
+.badge {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    color: white;
+}
+
+.badge.free { background-color: #10b981; }
+.badge.private { background-color: #f59e0b; }
+
+/* Chief Executives Officer Section */
+.bg-light { background-color: #f1f5f9; }
+
+.team-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 50px;
+    margin-top: 20px;
+}
+
+.team-card {
+    text-align: center;
+    max-width: 280px;
+    flex: 1 1 250px;
+}
+.avatar-wrapper {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 20px auto;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid #1e3a8a; /* Navy Frame */
+    box-shadow: 0 4px 15px rgba(30, 58, 138, 0.15);
+    background-color: #cbd5e1;
+}
+
+.avatar-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.team-card h3 {
+    font-size: 20px;
+    color: #0f172a;
+    margin-bottom: 6px;
+    font-weight: 700;
+}
+
+.team-card .role {
+    font-size: 14px;
+    color: #475569;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+/* Reviews Form Section */
+#comment-form {
+    background: white;
+    padding: 35px;
+    border-radius: 12px;
+    max-width: 600px;
+    margin: 0 auto 40px auto;
+    box-shadow: 0 4px 20px rgba(15, 23, 42, 0.03);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #334155;
+}
+
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus, .form-group textarea:focus {
+    border-color: #1e3a8a;
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 14px;
+    background-color: #1e3a8a;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+.btn-submit:hover { background-color: #172554; }
+
+.comments-list {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.comment-item {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    border-left: 4px solid #1e3a8a; /* Left border for LTR */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.01);
+}
+
+.comment-item h4 { margin-bottom: 6px; color: #334155; }
+
+/* Footer Section */
+footer {
+    background-color: #0f172a; /* Deep Dark Navy */
+    color: #f1f5f9;
+    text-align: center;
+    padding: 50px 20px;
+    margin-top: 60px;
+}
+
+.footer-slogan {
+    font-size: 15px;
+    color: #fbbf24;
+    margin-top: 5px;
+    font-style: italic;
+}
+
+.social-links {
+    margin-top: 25px;
+}
+
+.social-links a {
+    color: #cbd5e1;
+    text-decoration: none;
+    margin: 0 12px;
+    font-size: 15px;
+    transition: color 0.3s;
+    display: inline-block;
+}
+
+.social-links a:hover { color: #fbbf24; }
+/* بخش بنر اصلی بالای صفحه */
+.hero-banner {
+    position: relative;
+    height: 75vh;
+    background-image: url("banner.jpg"); 
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+
+/* لایه رنگی سرمه‌ای ۵۰ درصد که روی عکس می‌افتد */
+.hero-banner .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(35, 56, 104, 0.9) !important; /* عدد 0.5 یعنی ۵۰ درصد غلظت رنگ */
+    z-index: 1;
+}
+/* --- کدهای جدید برای ظاهر صنف‌ها و فرم ثبت‌نام --- */
+.course-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(15, 23, 42, 0.03);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #e2e8f0;
+    transition: transform 0.3s;
+}
+
+.course-img-wrapper {
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+}
+
+.course-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.course-info {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    padding-top: 15px;
+}
+
+.btn-sm {
+    padding: 6px 16px;
+    background-color: #1e3a8a;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-sm.disabled {
+    background-color: #cbd5e1;
+    color: #94a3b8;
+    cursor: not-allowed;
+}
+
+.badge.coming-soon { background-color: #64748b; }
+
+select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 15px;
+    background-color: white;
+    outline: none;
+}
+
+.developer-credits {
+    margin-top: 12px;
+    font-size: normal;
+    opacity:0.65;
+}
+.developer-credits a {
+    color:inherit;
+    text-decoration: none;
+    font-weight: normal;
+}
+/* --- تنظیمات کوچک کردن دایره عکس اساتید --- */
+.avatar-wrapper {
+    width: 140px !important;   /* اندازه دایره کوچک‌تر و ظریف‌تر شد */
+    height: 140px !important;  /* اندازه دایره کوچک‌تر و ظریف‌تر شد */
+    border: 3px solid #1e3a8a;
+    box-shadow: 0 4px 10px rgba(30, 58, 138, 0.1);
+}
+
+.team-card h3 {
+    font-size: 18px !important; /* اندازه اسم‌ها متناسب با عکس کوچک شد */
+}
+
+/* --- تنظیمات جادویی کدها برای نمایش بی‌نقص در موبایل (Responsive) --- */
+@media (max-width: 768px) {
+    /* مرتب کردن هدر و منوی بالا در گوشی */
+    header {
+        flex-direction: column;
+        padding: 15px 20px;
+        gap: 15px;
+    }
+    
+    header nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 0;
+    }
+    
+    header nav ul li {
+        margin: 5px 10px;
+    }
+
+    /* تنظیم متن بنر بالای صفحه در موبایل */
+    .hero-content h1 {
+        font-size: 32px !important;
+    }
+    
+    .slogan {
+        font-size: 18px !important;
+    }
+    
+    .hero-banner {
+        height: 60vh;
+    }
+
+    /* تک ستونه کردن تمام بخش‌ها تا در گوشی قاطی‌پاتی نشوند */
+    .courses-grid, .team-grid {
+        grid-template-columns: 1fr !important;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 25px;
+    }
+
+    .course-card, .team-card {
+        width: 100% !important;
+        max-width: 340px; /* کارت‌ها در گوشی فیت دست می‌شوند */
+    }
+
+    .container {
+        padding: 40px 15px; /* فاصله‌های کناری کمتر در موبایل */
+    }
+
+    /* فوتر در موبایل */
+    .social-links {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        align-items: center;
+    }
+    
+    .social-links a {
+        margin: 0;
+    }
+}
+/* --- تنظیمات نوار بالایی بنر (لوگو و سرچ روی عکس) --- */
+.banner-top-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between; /* لوگو چپ و سرچ راست قرار می‌گیرد */
+    align-items: center;
+    padding: 20px 40px;
+    z-index: 5; /* قرار گرفتن روی لایه مات */
+}
+
+/* استایل لوگو در گوشه چپ بنر */
+.banner-logo-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.banner-logo {
+    width: 80px; /* اندازه کوچک و ظریف مثل نمونه هاروارد */
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid rgba(255, 255, 255, 0.8); /* خط سفید ظریف دور لوگو */
+}
+
+/* استایل نوار جستجو در گوشه راست بنر */
+.banner-search-wrapper {
+    max-width: 280px;
+    width: 100%;
+}
+
+.banner-search-form {
+    display: flex;
+    background: rgba(255, 255, 255, 0.9); /* پس‌زمینه سفید نیمه‌شفاف شیک */
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.banner-search-input {
+    width: 100%;
+    border: none;
+    padding: 10px 15px;
+    font-size: 14px;
+    outline: none;
+    background: transparent;
+    color: #0f172a;
+}
+
+.banner-search-btn {
+    border: none;
+    background: transparent;
+    padding: 0 15px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s;
+}
+
+.banner-search-btn:hover {
+    background: rgba(30, 58, 138, 0.1); /* هاور ملایم سرمه‌ای */
+}
+
+/* تنظیم موقعیت محتوای وسط بنر */
+.hero-banner {
+    flex-direction: column;
+}
+
+/* اصلاح نمایش در موبایل برای نوار بالایی بنر */
+@media (max-width: 768px) {
+    .banner-top-bar {
+        flex-direction: row; /* در موبایل هم چپ و راست باقی بمانند */
+        padding: 15px 20px;
+    }
+    .banner-logo {
+        width: 60px;
+        height: 60px;
+    }
+    .banner-search-wrapper {
+        max-width: 180px; /* کوچک‌تر شدن کادر سرچ در گوشی */
+    }
+    .banner-search-input {
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+}
+/* --- کدهای بخش ویژگی‌ها و مزایای آکادمی --- */
+.features-section {
+    padding: 50px 20px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(15, 23, 42, 0.02);
+    margin-top: -30px; /* این خط باعث می‌شود بخش کمی روی بنر بیاید و شیک‌تر شود */
+    position: relative;
+    z-index: 10;
+}
+
+.features-grid-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+    text-align: center;
+}
+
+.feature-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.feature-icon-box {
+    width: 70px;
+    height: 70px;
+    background-color: #f1f5f9; /* پس‌زمینه ملایم برای دایره آیکون */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+}
+
+.feature-icon-box i {
+    font-size: 30px;
+    color: #1e3a8a; /* رنگ سرمه‌ای اصلی آکادمی رشد */
+}
+
+.feature-item:hover .feature-icon-box {
+    background-color: #1e3a8a; /* افکت هاور شیک: تغییر رنگ دایره به سرمه‌ای */
+}
+
+.feature-item:hover .feature-icon-box i {
+    color: #ffffff; /* افکت هاور شیک: تغییر رنگ آیکون به سفید */
+}
+
+.feature-item h3 {
+    font-size: 18px;
+    color: #0f172a;
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.feature-item p {
+    font-size: 14px;
+    color: #64748b;
+    line-height: 1.5;
+}
+
+/* هماهنگی کامل این بخش در موبایل */
+@media (max-width: 768px) {
+    .features-section {
+        margin-top: 20px; /* حذف فاصله منفی در موبایل برای زیبایی بیشتر */
+    }
+    .features-grid-layout {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
