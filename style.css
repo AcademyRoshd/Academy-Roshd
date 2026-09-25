@@ -680,3 +680,85 @@ select {
         gap: 20px;
     }
 }
+/* Volunteer Teacher Registration */
+
+.teacher-registration-section {
+    width: 100%;
+    padding: 50px 20px;
+    background: #f5f7fa;
+}
+
+.teacher-registration-box {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 30px;
+    text-align: center;
+    background: #ffffff;
+    border: 2px solid #102a43;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(16, 42, 67, 0.12);
+}
+
+.teacher-registration-box h2 {
+    color: #102a43;
+    margin-bottom: 15px;
+}
+
+.teacher-registration-box p {
+    max-width: 700px;
+    margin: 0 auto 25px;
+    line-height: 1.7;
+}
+
+.teacher-registration-btn {
+    display: inline-block;
+    padding: 13px 28px;
+    background: #102a43;
+    color: #ffffff;
+    text-decoration: none;
+    border: 2px solid #102a43;
+    border-radius: 7px;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.teacher-registration-btn:hover {
+    background: #ffffff;
+    color: #102a43;
+}
+
+@media (max-width: 600px) {
+
+    .teacher-registration-section {
+        padding: 35px 15px;
+    }
+
+    .teacher-registration-box {
+        padding: 30px 18px;
+    }
+
+    .teacher-registration-box h2 {
+        font-size: 22px;
+    }
+
+    .teacher-registration-box p {
+        font-size: 15px;
+    }
+
+    .teacher-registration-btn {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+nav ul li a[href="login.html"] {
+    background-color: #0b1f3a;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+nav ul li a[href="login.html"]:hover {
+    background-color: #162f52;
+}

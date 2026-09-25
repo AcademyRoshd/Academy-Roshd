@@ -24,6 +24,7 @@
                 <li><a href="#team">Our Team</a></li>
                 <li><a href="#comments">Reviews</a></li>
                 <li><a href="#footer">Contact</a></li>
+                <li><a href="login.html">Login</a></li>
             </ul>
         </nav>
     </header>
@@ -57,87 +58,72 @@
         </div>
     </section>
 
-    <!-- Online Classes Section with Images -->
-    <section id="courses" class="container">
-        <h2 class="section-title">Our Online Courses</h2>
-        <div class="courses-grid">
-            
-            <!-- 1. English Language (Active) -->
-            <div class="course-card">
-                <div class="course-img-wrapper">
-                    <img src="english.png" alt="English Class">
-                </div>
-                <div class="course-info">
-                    <h3>English Language</h3>
-                    <p>Improve your speaking, listening, and writing skills from beginner to advanced levels.</p>
-                    <div class="card-footer">
-                        <span class="badge private">Active</span>
-                        <a href="#admission" class="btn-sm">Apply</a>
-                    </div>
-                </div>
-            </div>
+    <!-- Online Classes Section -->
+<section id="courses" class="container">
+    <h2 class="section-title">Our Online Courses</h2>
 
-            <!-- 2. Computer Skills (Coming Soon) -->
-            <div class="course-card">
-                <div class="course-img-wrapper">
-                    <img src="computer.png" alt="Computer Class">
-                </div>
-                <div class="course-info">
-                    <h3>Computer Skills</h3>
-                    <p>Master essential tools like Word, Excel, and learn how to stay safe on the internet.</p>
-                    <div class="card-footer">
-                        <span class="badge coming-soon">Coming Soon</span>
-                        <button class="btn-sm disabled" disabled>Closed</button>
-                    </div>
-                </div>
-            </div>
+    <div class="courses-grid" id="courses-grid">
+        <!-- Classes will be loaded from Supabase -->
+        <p style="text-align:center; grid-column:1/-1;">
+            Loading courses...
+        </p>
+    </div>
+     <div style="text-align: center; margin: 30px 0 10px;">
+    <a href="classes.html" class="btn">
+        View All Classes →
+    </a>
+</div>
+</section>
 
-            <!-- 3. Web Development (Coming Soon) -->
-            <div class="course-card">
-                <div class="course-img-wrapper">
-                    <img src="web.png" alt="Web Development Class">
-                </div>
-                <div class="course-info">
-                    <h3>Web Development</h3>
-                    <p>Learn HTML, CSS, and JavaScript from scratch through live interactive sessions.</p>
-                    <div class="card-footer">
-                        <span class="badge coming-soon">Coming Soon</span>
-                        <button class="btn-sm disabled" disabled>Closed</button>
-                    </div>
-                </div>
-            </div>
+  <section id="admission" class="container bg-light">
+    <h2 class="section-title">Online Admission Form</h2>
 
+    <p style="text-align:center;">
+        Please log in to your student account before registering for a class.
+    </p>
+
+    <form id="admission-form">
+
+        <div class="form-group">
+            <label for="student-course">Select Course:</label>
+
+          <select id="student-course" required>
+    <option value="" disabled selected>
+        Loading available classes...
+    </option>
+</select>
         </div>
-    </section>
 
-    <!-- Student Admission Form Section -->
-    <section id="admission" class="container bg-light">
-        <h2 class="section-title">Online Admission Form</h2>
-        <form id="admission-form">
-            <div class="form-group">
-                <label for="student-name">Full Name:</label>
-                <input type="text" id="student-name" required placeholder="Enter your full name">
-            </div>
-            <div class="form-group">
-                <label for="student-whatsapp">WhatsApp Number:</label>
-                <input type="tel" id="student-whatsapp" required placeholder="e.g. +937XXXXXXXX">
-            </div>
-            <div class="form-group">
-                <label for="student-age">Age:</label>
-                <input type="number" id="student-age" required placeholder="Enter your age">
-            </div>
-            <div class="form-group">
-                <label for="student-course">Select Course:</label>
-                <select id="student-course" required>
-                    <option value="" disabled selected>Choose a course...</option>
-                    <option value="English Language">English Language (Active)</option>
-                    <option value="Computer Skills">Computer Skills (Join Waiting List)</option>
-                    <option value="Web Development">Web Development (Join Waiting List)</option>
-                </select>
-            </div>
-            <button type="submit" class="btn-submit">Submit Registration</button>
-        </form>
-    </section>
+        <button type="submit" class="btn-submit">
+            Submit Registration
+        </button>
+
+        <p id="admission-message"
+           style="text-align:center; margin-top:15px;">
+        </p>
+
+    </form>
+</section>
+    <!-- Volunteer Teacher Registration -->
+<section class="teacher-registration-section">
+
+    <div class="teacher-registration-box">
+
+        <h2>Volunteer Teacher Registration</h2>
+
+        <p>
+            Are you a skilled and responsible teacher?
+            Join Roshd Academy as a volunteer teacher and help provide
+            free online education for girls.
+        </p>
+
+        <a href="teacher-registration.html" class="teacher-registration-btn">
+            Register as a Teacher
+        </a>
+
+    </div>
+
+</section>
     <!-- Leadership & Team Section -->
     <section id="team" class="container bg-light">
         <h2 class="section-title">Chief Executive Officers</h2>
@@ -171,13 +157,13 @@
             </div>
 
             <!-- Fatima Qasemi -->
-<div class="team-card">
+        <div class="team-card">
     <div class="avatar-wrapper">
-        <img src="fatima.jpg" alt="Fatima Qasemi">
+        <img src="fatima.jpg" alt="Fatema Qasemi">
     </div>
-    <h3>Fatima Qasemi</h3>
+    <h3>Fatema Qasemi</h3>
     <p class="role">Administrator</p>
-</div>
+     </div>
 
         </div>
     </section>
@@ -258,38 +244,311 @@
             if (error) { alert("Error submitting review."); } else { nameInput.value = ""; messageInput.value = ""; loadReviews(); }
         });
 
-        // ۳. ثبت‌نام آنلاین دانش‌آموز جدید
-        document.getElementById("admission-form").addEventListener("submit", async function(e) {
-            e.preventDefault();
-            const name = document.getElementById("student-name").value.trim();
-            const whatsapp = document.getElementById("student-whatsapp").value.trim();
-            const age = document.getElementById("student-age").value.trim();
-            const course = document.getElementById("student-course").value;
-            const submitBtn = e.target.querySelector(".btn-submit");
+        // Student enrollment system
+document.getElementById("admission-form").addEventListener("submit", async function(e) {
 
-            submitBtn.disabled = true;
-            submitBtn.innerText = "Registering...";
+    e.preventDefault();
 
-            const { error } = await supabaseClient
-                .from("registrations")
-                .insert([{ full_name: name, whatsapp_number: whatsapp, age: parseInt(age), course_name: course }]);
+    var message = document.getElementById("admission-message");
+    var submitBtn = e.target.querySelector(".btn-submit");
+    var classId = document.getElementById("student-course").value;
 
-            if (error) {
-                alert("Registration failed. Please try again.");
-                console.error(error);
-            } else {
-                alert("Registration Successful! We will contact you on WhatsApp soon.");
-                document.getElementById("admission-form").reset();
-            }
-            submitBtn.disabled = false;
-            submitBtn.innerText = "Submit Registration";
-        });
+    if (!classId) {
+        message.textContent = "Please select a class.";
+        return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.innerText = "Submitting...";
+    message.textContent = "";
+
+    // Check logged-in user
+    var authResult = await supabaseClient.auth.getUser();
+
+    if (authResult.error || !authResult.data.user) {
+
+        message.textContent =
+            "Please log in to your student account before registering.";
+
+        submitBtn.disabled = false;
+        submitBtn.innerText = "Submit Registration";
+
+        return;
+    }
+
+    var user = authResult.data.user;
+
+    // Check if student already requested this class
+    var existingResult = await supabaseClient
+        .from("enrollments")
+        .select("id, status")
+        .eq("student_id", user.id)
+        .eq("class_id", parseInt(classId))
+        .maybeSingle();
+
+    if (existingResult.error) {
+
+        console.error(existingResult.error);
+
+        message.textContent =
+            "Could not check your previous registration.";
+
+        submitBtn.disabled = false;
+        submitBtn.innerText = "Submit Registration";
+
+        return;
+    }
+
+    if (existingResult.data) {
+
+        if (existingResult.data.status === "pending") {
+            message.textContent =
+                "You have already requested to join this class.";
+        } else if (existingResult.data.status === "approved") {
+            message.textContent =
+                "You are already approved for this class.";
+        } else {
+            message.textContent =
+                "You already have a registration for this class.";
+        }
+
+        submitBtn.disabled = false;
+        submitBtn.innerText = "Submit Registration";
+
+        return;
+    }
+
+    // Create new enrollment request
+    var insertResult = await supabaseClient
+        .from("enrollments")
+        .insert([{
+            student_id: user.id,
+            class_id: parseInt(classId),
+            status: "pending"
+        }]);
+
+    if (insertResult.error) {
+
+        console.error(insertResult.error);
+
+        message.textContent =
+            "Registration failed. Please try again.";
+
+    } else {
+
+        message.textContent =
+            "Registration request submitted successfully!";
+
+        document.getElementById("admission-form").reset();
+    }
+
+    submitBtn.disabled = false;
+    submitBtn.innerText = "Submit Registration";
+});
 
         function escapeHTML(str) {
             return str.replace(/[&<>""]/g, tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag));
         }
 
-        loadReviews();
+        // 5. Load classes from Supabase
+async function loadClasses() {
+    var coursesGrid = document.getElementById("courses-grid");
+
+    coursesGrid.innerHTML =
+        '<p style="text-align:center; grid-column:1/-1;">Loading courses...</p>';
+
+    var result = await supabaseClient
+        .from("classes")
+        .select("*")
+        .order("id", { ascending: true });
+
+    if (result.error) {
+        console.error("Error loading classes:", result.error);
+
+        coursesGrid.innerHTML =
+            '<p style="text-align:center; grid-column:1/-1;">Error loading courses.</p>';
+
+        return;
+    }
+
+   var classes = result.data
+    .filter(function(course) {
+        return course.registration_status === "open";
+    })
+    .slice(0, 3);
+
+coursesGrid.innerHTML = "";
+
+    var imageMap = {
+        1: "english.jpg",
+        2: "turkish.jpg",
+        3: "english-a2.jpg",
+        4: "computer.jpg",
+        5: "web.jpg"
+    };
+
+    classes.forEach(function(course) {
+
+        var statusText = "";
+        var statusClass = "";
+        var buttonHTML = "";
+
+        if (course.registration_status === "open") {
+
+            statusText = "Registration Open";
+            statusClass = "open";
+
+            buttonHTML =
+                '<a href="#admission" class="btn-sm">Apply</a>';
+
+        } else if (course.registration_status === "closed") {
+
+            statusText = "Currently Running";
+            statusClass = "active";
+
+            buttonHTML =
+                '<button class="btn-sm disabled" disabled>' +
+                'Registration Closed' +
+                '</button>';
+
+        } else if (course.registration_status === "coming_soon") {
+
+            statusText = "Coming Soon";
+            statusClass = "coming-soon";
+
+            buttonHTML =
+                '<button class="btn-sm disabled" disabled>' +
+                'Coming Soon' +
+                '</button>';
+        }
+
+        var imageName = imageMap[course.id] || "default-course.jpg";
+
+        var levelText = "";
+
+        if (course.level) {
+            levelText = " — " + escapeHTML(course.level);
+        }
+
+        var descriptionText = course.description;
+
+        if (!descriptionText) {
+            descriptionText =
+                "More information about this course will be available soon.";
+        }
+
+        var detailsHTML = "";
+
+        if (course.duration) {
+            detailsHTML +=
+                '<span>⏱ ' +
+                escapeHTML(course.duration) +
+                '</span>';
+        }
+
+        if (course.instructor_name) {
+            detailsHTML +=
+                '<span>👩‍🏫 ' +
+                escapeHTML(course.instructor_name) +
+                '</span>';
+        }
+
+        if (course.platform) {
+            detailsHTML +=
+                '<span>💻 ' +
+                escapeHTML(course.platform) +
+                '</span>';
+        }
+
+        var card = document.createElement("div");
+
+        card.className = "course-card";
+
+        card.innerHTML =
+            '<div class="course-img-wrapper">' +
+
+                '<img src="' + imageName + '"' +
+                ' alt="' + escapeHTML(course.name) + '"' +
+                ' onerror="this.src=\'default-course.jpg\'">' +
+
+            '</div>' +
+
+            '<div class="course-info">' +
+
+                '<h3>' +
+                escapeHTML(course.name) +
+                levelText +
+                '</h3>' +
+
+                '<p>' +
+                escapeHTML(descriptionText) +
+                '</p>' +
+
+                '<div class="course-details">' +
+                detailsHTML +
+                '</div>' +
+
+                '<div class="card-footer">' +
+
+                    '<span class="badge ' +
+                    statusClass +
+                    '">' +
+                    statusText +
+                    '</span>' +
+
+                    buttonHTML +
+
+                '</div>' +
+
+            '</div>';
+
+        coursesGrid.appendChild(card);
+    });
+}
+   async function loadOpenClassesForAdmission() {
+    const select = document.getElementById("student-course");
+
+    select.innerHTML =
+        '<option value="" disabled selected>Loading available classes...</option>';
+
+    const { data: classes, error } = await supabaseClient
+        .from("classes")
+        .select("id, name, level, registration_status")
+        .eq("registration_status", "open")
+        .order("id", { ascending: true });
+
+    if (error) {
+        console.error("Error loading admission classes:", error);
+
+        select.innerHTML =
+            '<option value="" disabled selected>Could not load classes.</option>';
+
+        return;
+    }
+
+    select.innerHTML =
+        '<option value="" disabled selected>Choose a course...</option>';
+
+    classes.forEach(function(course) {
+        const option = document.createElement("option");
+
+        option.value = course.id;
+
+        option.textContent =
+            course.name +
+            (course.level ? " — " + course.level : "");
+
+        select.appendChild(option);
+    });
+
+    if (classes.length === 0) {
+        select.innerHTML =
+            '<option value="" disabled selected>No classes are currently open.</option>';
+    }
+}
+    loadClasses();
+loadOpenClassesForAdmission();
+loadReviews();
         // ۴. سیستم جستجوی هوشمند صنف‌ها (بدون رفرش شدن صفحه)
 document.querySelector('.banner-search-form').addEventListener('submit', function(e) {
     e.preventDefault(); // جلوگیری از رفرش شدن صفحه هنگام زدن دکمه سرچ

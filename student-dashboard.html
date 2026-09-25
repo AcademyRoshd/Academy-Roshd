@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard | Roshd Academy</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            color: #1c2733;
+            min-height: 100vh;
+            border: 10px solid #102a43;
+        }
+
+        .dashboard-header {
+            background: #102a43;
+            color: #fff;
+            padding: 25px 30px;
+        }
+
+        .dashboard-header h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .dashboard-header p {
+            font-size: 15px;
+            opacity: 0.9;
+        }
+
+        .dashboard-container {
+            width: 100%;
+            max-width: 1100px;
+            margin: 35px auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            background: #fff;
+            border: 2px solid #102a43;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            color: #102a43;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .student-info p {
+            margin: 8px 0;
+            line-height: 1.5;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: #fff;
+            border: 1.5px solid #102a43;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .card h3 {
+            color: #102a43;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            margin: 7px 0;
+            line-height: 1.5;
+        }
+
+        .status {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 7px 10px;
+            border: 1px solid #102a43;
+            border-radius: 6px;
+            font-size: 13px;
+        }
+
+        .status-approved {
+            background: #e8f7ee;
+            color: #176b3a;
+            border-color: #176b3a;
+        }
+
+        .status-pending {
+            background: #fff8df;
+            color: #7a5a00;
+            border-color: #b08a00;
+        }
+
+        .status-rejected {
+            background: #fdecec;
+            color: #8b0000;
+            border-color: #8b0000;
+        }
+
+        .link {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 10px 15px;
+            background: #102a43;
+            color: #fff;
+            text-decoration: none;
+            border: 2px solid #102a43;
+            border-radius: 7px;
+        }
+
+        .link:hover {
+            background: #fff;
+            color: #102a43;
+        }
+
+        .logout-button {
+            width: 100%;
+            padding: 13px 25px;
+            background: #102a43;
+            color: #fff;
+            border: 2px solid #102a43;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .logout-button:hover {
+            background: #fff;
+            color: #102a43;
+        }
+
+        .message {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .error-message {
+            color: #8b0000;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                border-width: 6px;
+            }
+
+            .dashboard-header {
+                padding: 22px 18px;
+            }
+
+            .dashboard-header h1 {
+                font-size: 23px;
+            }
+
+            .dashboard-container {
+                margin: 25px auto;
+                padding: 0 15px;
+            }
+
+            .section {
+                padding: 20px;
+            }
+
+            .section-title {
+                font-size: 21px;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="dashboard-header">
+        <h1>Student Dashboard</h1>
+        <p>Roshd Academy</p>
+    </header>
+
+    <main class="dashboard-container">
+
+        <section class="section student-info">
+            <h2 class="section-title">My Information</h2>
+
+            <p>
+                <strong>Name:</strong>
+                <span id="studentName">Loading...</span>
+            </p>
+
+            <p>
+                <strong>Email:</strong>
+                <span id="studentEmail">Loading...</span>
+            </p>
+
+            <p>
+                <strong>Account Status:</strong>
+                <span id="accountStatus">Loading...</span>
+            </p>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">My Classes</h2>
+
+            <div id="classesContainer" class="grid">
+                <p class="message">Loading your classes...</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">My Schedule</h2>
+
+            <div id="scheduleContainer" class="grid">
+                <p class="message">Loading your schedule...</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Class Announcements</h2>
+
+            <div id="announcementContainer" class="grid">
+                <p class="message">Loading announcements...</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Course Materials</h2>
+
+            <div id="materialsContainer" class="grid">
+                <p class="message">Loading course materials...</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Account</h2>
+
+            <button id="logoutButton" class="logout-button">
+                Log Out
+            </button>
+        </section>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script>
+        const SUPABASE_URL =
+            "https://zrwxwkbyqclmgsjdwmup.supabase.co";
+
+        const SUPABASE_ANON_KEY =
+            "sb_publishable_Nd5Do5kgTtq5-_CjYz8qoA_w-LbrH0g";
+
+        const supabaseClient =
+            window.supabase.createClient(
+                SUPABASE_URL,
+                SUPABASE_ANON_KEY
+            );
+
+        let myClasses = [];
+
+        async function loadStudentDashboard() {
+
+            const userResult =
+                await supabaseClient.auth.getUser();
+
+            if (
+                userResult.error ||
+                !userResult.data ||
+                !userResult.data.user
+            ) {
+                window.location.href = "login.html";
+                return;
+            }
+
+            const user = userResult.data.user;
+
+            const profileResult =
+                await supabaseClient
+                    .from("profiles")
+                    .select(
+                        "id, full_name, email, role, account_status"
+                    )
+                    .eq("id", user.id)
+                    .single();
+
+            if (profileResult.error) {
+
+                console.error(
+                    "Profile loading error:",
+                    profileResult.error
+                );
+
+                showError(
+                    "classesContainer",
+                    "Could not load your profile."
+                );
+
+                return;
+            }
+
+            const profile = profileResult.data;
+
+            if (profile.role !== "student") {
+
+                showError(
+                    "classesContainer",
+                    "This account is not a student account."
+                );
+
+                return;
+            }
+
+            if (profile.account_status !== "active") {
+
+                showError(
+                    "classesContainer",
+                    "Your student account is not active yet."
+                );
+
+                return;
+            }
+
+            document.getElementById("studentName").textContent =
+                profile.full_name || "Not specified";
+
+            document.getElementById("studentEmail").textContent =
+                profile.email || user.email || "Not specified";
+
+            document.getElementById("accountStatus").textContent =
+                profile.account_status || "Not specified";
+
+            await loadStudentClasses(user.id);
+        }
+
+        async function loadStudentClasses(studentId) {
+
+            const enrollmentResult =
+                await supabaseClient
+                    .from("enrollments")
+                    .select(
+                        "id, class_id, status, approved_at, created_at"
+                    )
+                    .eq("student_id", studentId)
+                    .order("created_at", {
+                        ascending: false
+                    });
+
+            if (enrollmentResult.error) {
+
+                console.error(
+                    "Enrollment loading error:",
+                    enrollmentResult.error
+                );
+
+                showError(
+                    "classesContainer",
+                    "Could not load your enrollments."
+                );
+
+                return;
+            }
+
+            const enrollments =
+                enrollmentResult.data || [];
+
+            if (enrollments.length === 0) {
+
+                showMessage(
+                    "classesContainer",
+                    "You are not enrolled in any classes yet."
+                );
+
+                showMessage(
+                    "scheduleContainer",
+                    "Your schedule will appear here after you are approved for a class."
+                );
+
+                showMessage(
+                    "announcementContainer",
+                    "There are no class announcements to show yet."
+                );
+
+                showMessage(
+                    "materialsContainer",
+                    "Your course materials will appear here after you are approved for a class."
+                );
+
+                return;
+            }
+
+            const classIds =
+                enrollments.map(function(item) {
+                    return item.class_id;
+                });
+
+            const classesResult =
+                await supabaseClient
+                    .from("classes")
+                    .select(
+                        "id, name, level, duration, start_date, end_date, capacity, instructor_name, platform, registration_status, description"
+                    )
+                    .in("id", classIds);
+
+            if (classesResult.error) {
+
+                console.error(
+                    "Classes loading error:",
+                    classesResult.error
+                );
+
+                showError(
+                    "classesContainer",
+                    "Could not load class information."
+                );
+
+                return;
+            }
+
+            myClasses =
+                classesResult.data || [];
+
+            renderClasses(
+                enrollments,
+                myClasses
+            );
+
+            const approvedClassIds =
+                enrollments
+                    .filter(function(item) {
+                        return item.status === "approved";
+                    })
+                    .map(function(item) {
+                        return item.class_id;
+                    });
+
+            if (approvedClassIds.length === 0) {
+
+                showMessage(
+                    "scheduleContainer",
+                    "Your schedule will appear here after your enrollment is approved."
+                );
+
+                showMessage(
+                    "announcementContainer",
+                    "Class announcements will appear here after your enrollment is approved."
+                );
+
+                showMessage(
+                    "materialsContainer",
+                    "Course materials will appear here after your enrollment is approved."
+                );
+
+                return;
+            }
+
+            await loadSchedules(approvedClassIds);
+            await loadAnnouncements(approvedClassIds);
+            await loadMaterials(approvedClassIds);
+        }
+
+        function renderClasses(
+            enrollments,
+            classes
+        ) {
+
+            const container =
+                document.getElementById(
+                    "classesContainer"
+                );
+
+            container.innerHTML = "";
+
+            if (classes.length === 0) {
+
+                showMessage(
+                    "classesContainer",
+                    "No class information was found."
+                );
+
+                return;
+            }
+
+            classes.forEach(function(course) {
+
+                const enrollment =
+                    enrollments.find(function(item) {
+
+                        return Number(item.class_id) ===
+                            Number(course.id);
+                    });
+
+                const card =
+                    document.createElement("div");
+
+                card.className = "card";
+
+                const status =
+                    enrollment
+                        ? enrollment.status
+                        : "pending";
+
+                const statusClass =
+                    status === "approved"
+                        ? "status-approved"
+                        : status === "rejected"
+                            ? "status-rejected"
+                            : "status-pending";
+
+                let html =
+                    "<h3>" +
+                    escapeHtml(
+                        course.name || "Class"
+                    ) +
+                    "</h3>" +
+
+                    "<p><strong>Level:</strong> " +
+                    escapeHtml(
+                        course.level || "Not specified"
+                    ) +
+                    "</p>" +
+
+                    "<p><strong>Duration:</strong> " +
+                    escapeHtml(
+                        course.duration || "Not specified"
+                    ) +
+                    "</p>" +
+
+                    "<p><strong>Teacher:</strong> " +
+                    escapeHtml(
+                        course.instructor_name ||
+                        "Not specified"
+                    ) +
+                    "</p>" +
+
+                    "<p><strong>Platform:</strong> " +
+                    escapeHtml(
+                        course.platform || "Not specified"
+                    ) +
+                    "</p>";
+
+                if (course.start_date) {
+
+                    html +=
+                        "<p><strong>Start:</strong> " +
+                        escapeHtml(
+                            course.start_date
+                        ) +
+                        "</p>";
+                }
+
+                if (course.end_date) {
+
+                    html +=
+                        "<p><strong>End:</strong> " +
+                        escapeHtml(
+                            course.end_date
+                        ) +
+                        "</p>";
+                }
+
+                html +=
+                    "<span class='status " +
+                    statusClass +
+                    "'>" +
+                    "Enrollment: " +
+                    escapeHtml(status) +
+                    "</span>";
+
+                card.innerHTML = html;
+
+                container.appendChild(card);
+            });
+        }
+
+        async function loadSchedules(classIds) {
+
+            const container =
+                document.getElementById(
+                    "scheduleContainer"
+                );
+
+            const scheduleResult =
+                await supabaseClient
+                    .from("schedules")
+                    .select(
+                        "id, class_id, day_of_week, start_time, end_time, created_at"
+                    )
+                    .in("class_id", classIds)
+                    .order("day_of_week", {
+                        ascending: true
+                    });
+
+            if (scheduleResult.error) {
+
+                console.error(
+                    "Schedule loading error:",
+                    scheduleResult.error
+                );
+
+                showError(
+                    "scheduleContainer",
+                    "Could not load your schedule."
+                );
+
+                return;
+            }
+
+            const schedules =
+                scheduleResult.data || [];
+
+            if (schedules.length === 0) {
+
+                showMessage(
+                    "scheduleContainer",
+                    "No schedule has been added for your approved classes yet."
+                );
+
+                return;
+            }
+
+            container.innerHTML = "";
+
+            schedules.forEach(function(schedule) {
+
+                const course =
+                    myClasses.find(function(item) {
+
+                        return Number(item.id) ===
+                            Number(schedule.class_id);
+                    });
+
+                const card =
+                    document.createElement("div");
+
+                card.className = "card";
+
+                card.innerHTML =
+                    "<h3>" +
+                    escapeHtml(
+                        course
+                            ? course.name
+                            : "Class"
+                    ) +
+                    "</h3>" +
+
+                    "<p><strong>Day:</strong> " +
+                    escapeHtml(
+                        schedule.day_of_week ||
+                        "Not specified"
+                    ) +
+                    "</p>" +
+
+                    "<p><strong>Time:</strong> " +
+                    escapeHtml(
+                        formatTime(
+                            schedule.start_time
+                        )
+                    ) +
+                    " - " +
+                    escapeHtml(
+                        formatTime(
+                            schedule.end_time
+                        )
+                    ) +
+                    "</p>";
+
+                container.appendChild(card);
+            });
+        }
+
+        async function loadAnnouncements(classIds) {
+
+            const container =
+                document.getElementById(
+                    "announcementContainer"
+                );
+
+            const result =
+                await supabaseClient
+                    .from("class_announcements")
+                    .select(
+                        "id, class_id, title, content, link, created_at"
+                    )
+                    .in("class_id", classIds)
+                    .order("created_at", {
+                        ascending: false
+                    });
+
+            if (result.error) {
+
+                console.error(
+                    "Announcements loading error:",
+                    result.error
+                );
+
+                showError(
+                    "announcementContainer",
+                    "Could not load class announcements."
+                );
+
+                return;
+            }
+
+            const items =
+                result.data || [];
+
+            if (items.length === 0) {
+
+                showMessage(
+                    "announcementContainer",
+                    "There are no announcements yet."
+                );
+
+                return;
+            }
+
+            container.innerHTML = "";
+
+            items.forEach(function(item) {
+
+                const course =
+                    myClasses.find(function(courseItem) {
+
+                        return Number(courseItem.id) ===
+                            Number(item.class_id);
+                    });
+
+                const card =
+                    document.createElement("div");
+
+                card.className = "card";
+
+                let html =
+                    "<h3>" +
+                    escapeHtml(
+                        item.title ||
+                        "Announcement"
+                    ) +
+                    "</h3>" +
+
+                    "<p><strong>Class:</strong> " +
+                    escapeHtml(
+                        course
+                            ? course.name
+                            : "Class"
+                    ) +
+                    "</p>" +
+
+                    "<p>" +
+                    escapeHtml(
+                        item.content || ""
+                    ) +
+                    "</p>";
+
+                if (item.link) {
+
+                    html +=
+                        "<a class='link' href='" +
+                        escapeAttribute(item.link) +
+                        "' target='_blank' rel='noopener'>" +
+                        "Open Link" +
+                        "</a>";
+                }
+
+                card.innerHTML = html;
+
+                container.appendChild(card);
+            });
+        }
+
+        async function loadMaterials(classIds) {
+
+            const container =
+                document.getElementById(
+                    "materialsContainer"
+                );
+
+            const result =
+                await supabaseClient
+                    .from("course_materials")
+                    .select(
+                        "id, class_id, title, description, file_type, file_url, created_at"
+                    )
+                    .in("class_id", classIds)
+                    .order("created_at", {
+                        ascending: false
+                    });
+
+            if (result.error) {
+
+                console.error(
+                    "Materials loading error:",
+                    result.error
+                );
+
+                showError(
+                    "materialsContainer",
+                    "Could not load course materials."
+                );
+
+                return;
+            }
+
+            const items =
+                result.data || [];
+
+            if (items.length === 0) {
+
+                showMessage(
+                    "materialsContainer",
+                    "No course materials have been uploaded yet."
+                );
+
+                return;
+            }
+
+            container.innerHTML = "";
+
+            items.forEach(function(item) {
+
+                const course =
+                    myClasses.find(function(courseItem) {
+
+                        return Number(courseItem.id) ===
+                            Number(item.class_id);
+                    });
+
+                const card =
+                    document.createElement("div");
+
+                card.className = "card";
+
+                let html =
+                    "<h3>" +
+                    escapeHtml(
+                        item.title ||
+                        "Course Material"
+                    ) +
+                    "</h3>" +
+
+                    "<p><strong>Class:</strong> " +
+                    escapeHtml(
+                        course
+                            ? course.name
+                            : "Class"
+                    ) +
+                    "</p>";
+
+                if (item.description) {
+
+                    html +=
+                        "<p>" +
+                        escapeHtml(
+                            item.description
+                        ) +
+                        "</p>";
+                }
+
+                if (item.file_type) {
+
+                    html +=
+                        "<p><strong>Type:</strong> " +
+                        escapeHtml(
+                            item.file_type
+                        ) +
+                        "</p>";
+                }
+
+                if (item.file_url) {
+
+                    html +=
+                        "<a class='link' href='" +
+                        escapeAttribute(item.file_url) +
+                        "' target='_blank' rel='noopener'>" +
+                        "Open Material" +
+                        "</a>";
+                }
+
+                card.innerHTML = html;
+
+                container.appendChild(card);
+            });
+        }
+
+        function formatTime(value) {
+
+            if (!value) {
+                return "Not specified";
+            }
+
+            const parts =
+                String(value).split(":");
+
+            if (parts.length < 2) {
+                return String(value);
+            }
+
+            return parts[0] + ":" + parts[1];
+        }
+
+        function showMessage(
+            id,
+            message
+        ) {
+
+            const element =
+                document.getElementById(id);
+
+            if (!element) {
+                return;
+            }
+
+            element.innerHTML =
+                "<p class='message'>" +
+                escapeHtml(message) +
+                "</p>";
+        }
+
+        function showError(
+            id,
+            message
+        ) {
+
+            const element =
+                document.getElementById(id);
+
+            if (!element) {
+                return;
+            }
+
+            element.innerHTML =
+                "<p class='error-message'>" +
+                escapeHtml(message) +
+                "</p>";
+        }
+
+        function escapeHtml(value) {
+
+            return String(value)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        function escapeAttribute(value) {
+
+            return String(value)
+                .replace(/&/g, "&amp;")
+                .replace(/"/g, "&quot;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;");
+        }
+
+        document
+            .getElementById("logoutButton")
+            .addEventListener(
+                "click",
+                async function() {
+
+                    const result =
+                        await supabaseClient.auth.signOut();
+
+                    if (result.error) {
+
+                        console.error(
+                            "Logout error:",
+                            result.error
+                        );
+
+                        return;
+                    }
+
+                    window.location.href =
+                        "login.html";
+                }
+            );
+
+        loadStudentDashboard();
+    </script>
+
+</body>
+
+</html>

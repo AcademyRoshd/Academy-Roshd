@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | Roshd Academy</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f3f5f8;
+            color: #1c2733;
+            min-height: 100vh;
+            border: 10px solid #102a43;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 25px;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 460px;
+        }
+
+        .login-box {
+            background: #ffffff;
+            border: 2px solid #102a43;
+            border-radius: 12px;
+            padding: 40px 32px;
+            box-shadow: 0 5px 20px rgba(16, 42, 67, 0.12);
+        }
+
+        h1 {
+            color: #102a43;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 30px;
+        }
+
+        .subtitle {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #52606d;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            color: #102a43;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px 14px;
+            border: 1.5px solid #102a43;
+            border-radius: 7px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        input:focus {
+            border: 2px solid #102a43;
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 14px;
+            background: #102a43;
+            color: #ffffff;
+            border: 2px solid #102a43;
+            border-radius: 7px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .login-button:hover {
+            background: #ffffff;
+            color: #102a43;
+        }
+
+        .message {
+            margin-top: 18px;
+            text-align: center;
+            font-size: 14px;
+            min-height: 20px;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 22px;
+            color: #102a43;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                border-width: 6px;
+                padding: 15px;
+            }
+
+            .login-box {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-container">
+
+        <div class="login-box">
+
+            <h1>Roshd Academy</h1>
+
+            <p class="subtitle">Login to your account</p>
+
+            <form id="loginForm">
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        autocomplete="email"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        autocomplete="current-password"
+                        required
+                    >
+                </div>
+
+                <button
+                    type="submit"
+                    class="login-button"
+                >
+                    Login
+                </button>
+
+            </form>
+
+            <div id="loginMessage" class="message"></div>
+           <a href="signup.html" class="back-link">
+    Don't have an account? Sign Up
+</a>
+
+<a href="index.html" class="back-link">
+    Back to Roshd Academy
+</a>
+
+        </div>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+   <script>
+const SUPABASE_URL = "https://zrwxwkbyqclmgsjdwmup.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_Nd5Do5kgTtq5-_CjYz8qoA_w-LbrH0g";
+
+const supabaseClient = supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_ANON_KEY
+);
+
+const loginForm = document.getElementById("loginForm");
+const loginMessage = document.getElementById("loginMessage");
+
+loginForm.addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    loginMessage.textContent = "Signing in...";
+
+    const email = document
+        .getElementById("email")
+        .value
+        .trim();
+
+    const password = document
+        .getElementById("password")
+        .value;
+
+    if (!email || !password) {
+        loginMessage.textContent =
+            "Please enter your email and password.";
+        return;
+    }
+
+    const { data, error } =
+        await supabaseClient.auth.signInWithPassword({
+            email: email,
+            password: password
+        });
+
+    if (error) {
+        console.error("LOGIN ERROR:", error);
+
+        loginMessage.textContent =
+            "Login failed: " + error.message;
+
+        return;
+    }
+
+    const user = data.user;
+
+    if (!user) {
+        loginMessage.textContent =
+            "Login failed: user not found.";
+
+        return;
+    }
+
+    const { data: profile, error: profileError } =
+        await supabaseClient
+            .from("profiles")
+            .select("full_name, email, role, account_status")
+            .eq("id", user.id)
+            .single();
+
+    if (profileError) {
+        console.error("PROFILE ERROR:", profileError);
+
+        loginMessage.textContent =
+            "Profile error: " +
+            profileError.message +
+            " | Code: " +
+            profileError.code;
+
+        await supabaseClient.auth.signOut();
+
+        return;
+    }
+
+    if (profile.account_status !== "active") {
+        loginMessage.textContent =
+            "Your account is not active.";
+
+        await supabaseClient.auth.signOut();
+
+        return;
+    }
+
+    loginMessage.textContent =
+        "Login successful. Redirecting...";
+
+if (profile.role === "admin") {
+    window.location.href = "admin-dashboard.html";
+    return;
+}
+
+if (profile.role === "teacher") {
+    window.location.href = "teacher-dashboard.html";
+    return;
+}
+
+if (profile.role === "student") {
+    window.location.href = "student-dashboard.html";
+    return;
+}
+
+    loginMessage.textContent =
+        "Your account role is not recognized.";
+
+    await supabaseClient.auth.signOut();
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Volunteer Teacher Registration | Roshd Academy</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f3f5f8;
+            color: #1c2733;
+            line-height: 1.7;
+            min-height: 100vh;
+            border: 12px solid #102a43;
+        }
+
+        .page-container {
+            width: 100%;
+            max-width: 1050px;
+            margin: 35px auto;
+            padding: 0 20px;
+        }
+
+        .information-section,
+        .form-section {
+            background: #ffffff;
+            border: 2px solid #102a43;
+            border-radius: 12px;
+            padding: 35px;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            color: #102a43;
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 25px;
+        }
+
+        h2 {
+            color: #102a43;
+            font-size: 22px;
+            margin-top: 25px;
+            margin-bottom: 12px;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        ul {
+            padding-left: 25px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .form-title {
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #102a43;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        label {
+            display: block;
+            color: #102a43;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            max-width: 100%;
+            padding: 13px 14px;
+            border: 1.5px solid #102a43;
+            border-radius: 7px;
+            background: #ffffff;
+            color: #1c2733;
+            font-size: 15px;
+            font-family: inherit;
+            outline: none;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            border: 2px solid #102a43;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .radio-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 10px 0;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            font-weight: normal;
+            color: #1c2733;
+        }
+
+        .radio-option input {
+            width: auto;
+        }
+
+        .required {
+            color: #102a43;
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 14px 20px;
+            background: #102a43;
+            color: #ffffff;
+            border: 2px solid #102a43;
+            border-radius: 7px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .submit-button:hover {
+            background: #ffffff;
+            color: #102a43;
+        }
+
+        .footer-note {
+            text-align: center;
+            color: #102a43;
+            margin-top: 25px;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+
+            body {
+                border-width: 7px;
+            }
+
+            .page-container {
+                margin: 20px auto;
+                padding: 0 10px;
+            }
+
+            .information-section,
+            .form-section {
+                padding: 22px 18px;
+                border-radius: 9px;
+            }
+
+            h1 {
+                font-size: 25px;
+                line-height: 1.4;
+            }
+
+            h2 {
+                font-size: 19px;
+            }
+            input,
+            textarea,
+            select {
+                font-size: 16px;
+                padding: 12px;
+            }
+
+            .radio-group {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            body {
+                border-width: 5px;
+            }
+
+            .page-container {
+                padding: 0 6px;
+            }
+
+            .information-section,
+            .form-section {
+                padding: 18px 14px;
+            }
+
+            h1 {
+                font-size: 22px;
+            }
+
+            h2 {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page-container">
+
+        <section class="information-section">
+
+            <h1>Volunteer Teacher Recruitment | Roshd Academy</h1>
+
+            <p>
+                Roshd Academy invites skilled and responsible teachers to join
+                us in providing free online classes for girls.
+            </p>
+
+            <h2>Volunteer Program</h2>
+
+            <ul>
+                <li>Duration: 2 months</li>
+                <li>Teaching: Fully online and voluntary</li>
+                <li>No fees are charged from students.</li>
+                <li>No financial payment is provided to volunteer teachers.</li>
+                <li>A certificate of collaboration will be provided after successful completion.</li>
+            </ul>
+
+            <h2>Recognition of Outstanding Volunteer Teachers</h2>
+
+            <p>
+                Teachers who demonstrate effective teaching, regularity,
+                responsibility, and outstanding performance during the program
+                may be recognized as outstanding volunteer teachers of
+                Roshd Academy.
+            </p>
+
+            <p>
+                With their consent, their name, photograph, and a short
+                introduction may be published on the official Roshd Academy
+                website.
+            </p>
+
+        </section>
+
+
+        <section class="form-section">
+
+            <h2 class="form-title">Teacher Registration Form</h2>
+
+            <form id="teacherApplicationForm">
+
+    <!-- 1. Full Name -->
+    <div class="form-group">
+        <label for="fullName">
+            1. Full Name <span class="required">*</span>
+        </label>
+        <input
+            type="text"
+            id="fullName"
+            name="full_name"
+            required
+        >
+    </div>
+
+
+    <!-- 2. WhatsApp Number -->
+    <div class="form-group">
+        <label for="whatsappNumber">
+            2. WhatsApp Number <span class="required">*</span>
+        </label>
+        <input
+            type="tel"
+            id="whatsappNumber"
+            name="whatsapp_number"
+            required
+        >
+    </div>
+
+
+    <!-- 3. Email -->
+    <div class="form-group">
+        <label for="email">
+            3. Email <span class="required">*</span>
+        </label>
+        <input
+            type="email"
+            id="email"
+            name="email"
+            required
+        >
+    </div>
+
+
+    <!-- 4. Subject or Skill -->
+    <div class="form-group">
+        <label for="subjectSkill">
+            4. What subject or skill do you teach?
+            <span class="required">*</span>
+        </label>
+        <input
+            type="text"
+            id="subjectSkill"
+            name="subject_or_skill"
+            required
+        >
+    </div>
+
+
+    <!-- 5. Expertise Level -->
+    <div class="form-group">
+        <label for="expertiseLevel">
+            5. What is your level of expertise in this field?
+            <span class="required">*</span>
+        </label>
+
+        <select
+            id="expertiseLevel"
+            name="expertise_level"
+            required
+        >
+            <option value="">Select your level</option>
+            <option value="Beginner">Beginner</option>
+            <option value="Intermediate">Intermediate</option>
+            <option value="Advanced">Advanced</option>
+        </select>
+    </div>
+
+
+    <!-- 6. Teaching Experience -->
+    <div class="form-group">
+        <label>
+            6. Do you have teaching experience?
+            <span class="required">*</span>
+        </label>
+
+        <div class="radio-group">
+
+            <label class="radio-option">
+                <input
+                    type="radio"
+                    name="teaching_experience"
+                    value="true"
+                    required
+                >
+                Yes
+            </label>
+
+            <label class="radio-option">
+                <input
+                    type="radio"
+                    name="teaching_experience"
+                    value="false"
+                >
+                No
+            </label>
+
+        </div>
+    </div>
+
+
+    <!-- 7. Teaching Experience Details -->
+    <div class="form-group">
+        <label for="experienceDetails">
+            7. If yes, briefly describe your teaching experience.
+        </label>
+
+        <textarea
+            id="experienceDetails"
+            name="teaching_experience_details"
+        ></textarea>
+    </div>
+
+
+    <!-- 8. Online Teaching Experience -->
+    <div class="form-group">
+        <label>
+            8. Do you have online teaching experience?
+            <span class="required">*</span>
+        </label>
+
+        <div class="radio-group">
+
+            <label class="radio-option">
+                <input
+                    type="radio"
+                    name="online_teaching_experience"
+                    value="true"
+                    required
+                >
+                Yes
+            </label>
+
+            <label class="radio-option">
+                <input
+                    type="radio"
+                    name="online_teaching_experience"
+                    value="false"
+                >
+                No
+            </label>
+
+        </div>
+    </div>
+
+
+    <!-- 9. Sessions Per Week -->
+    <div class="form-group">
+        <label for="sessionsPerWeek">
+            9. How many sessions can you teach per week?
+            <span class="required">*</span>
+        </label>
+        <input
+            type="number"
+            id="sessionsPerWeek"
+            name="sessions_per_week"
+            min="1"
+            required
+        >
+    </div>
+
+
+    <!-- 10. Preferred Schedule -->
+    <div class="form-group">
+        <label for="preferredSchedule">
+            10. What days and times are convenient for you to teach?
+            <span class="required">*</span>
+        </label>
+
+        <textarea
+            id="preferredSchedule"
+            name="preferred_schedule"
+            placeholder="Example: Saturday and Monday, 4:00 PM - 6:00 PM"
+            required
+        ></textarea>
+    </div>
+
+
+    <!-- 11. Motivation -->
+    <div class="form-group">
+        <label for="motivation">
+            11. Why would you like to volunteer with Roshd Academy?
+            <span class="required">*</span>
+        </label>
+
+        <textarea
+            id="motivation"
+            name="motivation"
+            required
+        ></textarea>
+    </div>
+
+
+    <!-- 12. Two Month Commitment -->
+    <div class="form-group">
+        <label>
+            12. Are you committed to being regular and punctual
+            for two months?
+            <span class="required">*</span>
+        </label>
+
+        <div class="radio-group">
+
+            <label class="radio-option">
+                <input
+                    type="radio"
+                    name="two_month_commitment"
+                    value="true"
+                    required
+                >
+                Yes
+            </label>
+
+            <label class="radio-option">
+                <input
+                    type="radio"
+                    name="two_month_commitment"
+                    value="false"
+                >
+                No
+            </label>
+
+        </div>
+    </div>
+
+
+    <!-- 13. Voluntary Agreement -->
+    <div class="form-group">
+        <label>
+            13. Do you agree that this is a voluntary position
+            with no financial compensation?
+            <span class="required">*</span>
+        </label>
+
+        <div class="radio-group">
+
+            <label class="radio-option">
+                <input
+                    type="radio"
+                    name="voluntary_agreement"
+                    value="true"
+                    required
+                >
+                Yes
+            </label>
+
+            <label class="radio-option">
+                <input
+                    type="radio"
+                    name="voluntary_agreement"
+                    value="false"
+                >
+                No
+            </label>
+
+        </div>
+    </div>
+
+
+    <!-- 14. Portfolio -->
+<div class="form-group">
+    <label for="portfolioUrl">
+        14. If you have a CV, certificate, or portfolio,
+        please provide the link. (Optional)
+    </label>
+
+    <input
+        type="url"
+        id="portfolioUrl"
+        name="portfolio_url"
+        placeholder="https://example.com"
+    >
+</div>
+
+
+    <!-- 15. Website Profile Consent -->
+    <div class="form-group">
+        <label>
+            15. If selected as an outstanding volunteer teacher,
+            do you agree to having your name, photograph, and
+            short introduction published on the Roshd Academy website?
+            <span class="required">*</span>
+        </label>
+
+        <div class="radio-group">
+
+            <label class="radio-option">
+                <input
+                    type="radio"
+                    name="website_profile_consent"
+                    value="true"
+                    required
+                >
+                Yes
+            </label>
+
+            <label class="radio-option">
+                <input
+                    type="radio"
+                    name="website_profile_consent"
+                    value="false"
+                >
+                No
+            </label>
+
+        </div>
+    </div>
+
+
+    <!-- Submit Button -->
+    <button
+        type="submit"
+        class="submit-button"
+    >
+        Submit Application
+    </button>
+
+</form>
+<p class="footer-note">
+    Thank you for joining Roshd Academy in our mission to provide
+    education and empower girls.
+</p>
+
+        </section>
+
+    </div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+    const SUPABASE_URL = "https://zrwxwkbyqclmgsjdwmup.supabase.co";
+    const SUPABASE_ANON_KEY = "sb_publishable_Nd5Do5kgTtq5-_CjYz8qoA_w-LbrH0g";
+
+    const supabaseClient = supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY
+    );
+</script>
+<script>
+    const teacherForm = document.getElementById("teacherApplicationForm");
+
+    teacherForm.addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        const formData = new FormData(teacherForm);
+
+        const application = {
+            full_name: formData.get("full_name"),
+            whatsapp_number: formData.get("whatsapp_number"),
+            email: formData.get("email"),
+            subject_or_skill: formData.get("subject_or_skill"),
+            expertise_level: formData.get("expertise_level"),
+
+            teaching_experience:
+                formData.get("teaching_experience") === "true",
+
+            teaching_experience_details:
+                formData.get("teaching_experience_details"),
+
+            online_teaching_experience:
+                formData.get("online_teaching_experience") === "true",
+
+            sessions_per_week:
+                Number(formData.get("sessions_per_week")),
+
+            preferred_schedule:
+                formData.get("preferred_schedule"),
+
+            motivation:
+                formData.get("motivation"),
+
+            two_month_commitment:
+                formData.get("two_month_commitment") === "true",
+
+            voluntary_agreement:
+                formData.get("voluntary_agreement") === "true",
+
+            portfolio_url:
+                formData.get("portfolio_url") || null,
+
+            website_profile_consent:
+                formData.get("website_profile_consent") === "true"
+        };
+
+         const { error } = await supabaseClient
+    .from("teacher_applications")
+    .insert([application]);
+        if (error) {
+            console.error(error);
+            alert("Your application could not be submitted. Please try again.");
+            return;
+        }
+
+        alert("Your application has been submitted successfully.");
+
+        teacherForm.reset();
+    });
+</script>
+
+</body>
+</html>

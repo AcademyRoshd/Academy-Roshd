@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Sign Up - Roshd Academy</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            color: #222;
+        }
+
+        .signup-container {
+            width: 90%;
+            max-width: 520px;
+            margin: 60px auto;
+            background: white;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .signup-container h1 {
+            text-align: center;
+            color: #0b1f3a;
+            margin-bottom: 10px;
+        }
+
+        .signup-container .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #0b1f3a;
+        }
+
+        .btn-signup {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 6px;
+            background: #0b1f3a;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .btn-signup:hover {
+            background: #162f52;
+        }
+
+        .btn-signup:disabled {
+            background: #888;
+            cursor: not-allowed;
+        }
+
+        #signupMessage {
+            text-align: center;
+            margin-top: 18px;
+            line-height: 1.6;
+        }
+
+        .back-login {
+            text-align: center;
+            margin-top: 22px;
+        }
+
+        .back-login a {
+            color: #0b1f3a;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back-login a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="signup-container">
+
+        <h1>Student Sign Up</h1>
+
+        <p class="subtitle">
+            Create your student account at Roshd Academy
+        </p>
+
+        <form id="signupForm">
+
+            <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <input
+                    type="text"
+                    id="fullName"
+                    placeholder="Enter your full name"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Enter your email"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Create a password"
+                    required
+                    minlength="6"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input
+                    type="number"
+                    id="age"
+                    placeholder="Enter your age"
+                    min="10"
+                    max="100"
+                    required
+                >
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone / WhatsApp</label>
+                <input
+                    type="tel"
+                    id="phone"
+                    placeholder="Enter your phone or WhatsApp number"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="nationalId">National ID</label>
+                <input
+                    type="text"
+                    id="nationalId"
+                    placeholder="Enter your national ID"
+                    required
+                >
+            </div>
+
+            <button type="submit" class="btn-signup">
+                Create Student Account
+            </button>
+
+            <p id="signupMessage"></p>
+
+        </form>
+
+        <div class="back-login">
+            Already have an account?
+            <a href="login.html">Login</a>
+        </div>
+
+    </div>
+
+    <script>
+        const SUPABASE_URL = "https://zrwxwkbyqclmgsjdwmup.supabase.co";
+        const SUPABASE_ANON_KEY = "sb_publishable_Nd5Do5kgTtq5-_CjYz8qoA_w-LbrH0g";
+
+        const supabaseClient = supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_ANON_KEY
+        );
+
+        const signupForm = document.getElementById("signupForm");
+        const signupMessage = document.getElementById("signupMessage");
+
+        signupForm.addEventListener("submit", async function(event) {
+
+            event.preventDefault();
+
+            const fullName = document.getElementById("fullName").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value;
+            const age = parseInt(document.getElementById("age").value);
+            const phone = document.getElementById("phone").value.trim();
+            const nationalId = document.getElementById("nationalId").value.trim();
+
+            console.log("FORM DATA:");
+console.log("Full Name:", fullName);
+console.log("Email:", email);
+console.log("Age:", age);
+console.log("Phone:", phone);
+console.log("National ID:", nationalId);
+
+            const button = signupForm.querySelector(".btn-signup");
+
+            if (!fullName || !email || !password || !age || !phone || !nationalId) {
+                signupMessage.textContent = "Please fill in all fields.";
+                return;
+            }
+
+            button.disabled = true;
+            button.textContent = "Creating account...";
+            signupMessage.textContent = "";
+
+
+            console.log("DATA BEING SENT TO SUPABASE:");
+console.log({
+    full_name: fullName,
+    age: age,
+    phone: phone,
+    national_id: nationalId
+});
+
+           const authResult = await supabaseClient.auth.signUp({
+    email: email,
+    password: password,
+    options: {
+        data: {
+            full_name: fullName,
+            age: age,
+            phone: phone,
+            national_id: nationalId
+        }
+    }
+});
+
+            if (authResult.error) {
+                console.error(authResult.error);
+                signupMessage.textContent = authResult.error.message;
+
+                button.disabled = false;
+                button.textContent = "Create Student Account";
+                return;
+            }
+
+            const user = authResult.data.user;
+
+            if (!user) {
+                signupMessage.textContent = "Account creation failed. Please try again.";
+
+                button.disabled = false;
+                button.textContent = "Create Student Account";
+                return;
+            }
+
+          // Save complete student information in private Supabase storage
+const recordResult = await supabaseClient.rpc(
+    "create_student_record",
+    {
+        p_full_name: fullName,
+        p_email: email,
+        p_age: age,
+        p_phone: phone,
+        p_national_id: nationalId
+    }
+);
+
+if (recordResult.error) {
+    console.error("Student record error:", recordResult.error);
+
+    await supabaseClient.auth.signOut();
+
+    signupMessage.textContent =
+        "Account was created, but the student information could not be saved.";
+
+    button.disabled = false;
+    button.textContent = "Create Student Account";
+    return;
+}
+
+            signupMessage.textContent =
+                "Student account created successfully! Redirecting to Login...";
+                signupForm.reset();
+
+            setTimeout(function() {
+                window.location.href = "login.html";
+            }, 1500);
+        });
+    </script>
+
+</body>
+</html>
