@@ -562,25 +562,46 @@ async function loadMaterials(classId) {
 
     container.innerHTML = "";
 
-    materials.forEach(material => {
+    for (const material of materials) {
         const item = document.createElement("div");
         item.className = "class-card";
+        let storagePath = material.file_url || "";
+        const marker = "/course-materials/";
+        const markerIndex = storagePath.indexOf(marker);
+        if (markerIndex !== -1) storagePath = decodeURIComponent(storagePath.substring(markerIndex + marker.length));
 
+        let links = "<p class='error-message'>Material links are temporarily unavailable.</p>";
+        if (storagePath) {
+            const openResult = await supabaseClient.storage.from("course-materials").createSignedUrl(storagePath, 3600);
+            const downloadResult = await supabaseClient.storage.from("course-materials").createSignedUrl(storagePath, 3600, { download: true });
+            if (!openResult.error && openResult.data && openResult.data.signedUrl && !downloadResult.error && downloadResult.data && downloadResult.data.signedUrl) {
+                links = "<p><a href='" + openResult.data.signedUrl + "' target='_blank' rel='noopener noreferrer'>View / Open</a> <a href='" + downloadResult.data.signedUrl + "' download>Download</a></p>";
+            } else console.error("Material signed URL error:", openResult.error || downloadResult.error);
+        }
+
+        const sizeText = material.file_size !== null && material.file_size !== undefined ? formatFileSize(material.file_size) : "Not recorded for this older upload";
         item.innerHTML =
             "<h3>" + (material.title || "Untitled Material") + "</h3>" +
             "<p>" + (material.description || "No description") + "</p>" +
-            "<p><a href='" + material.file_url + "' target='_blank' rel='noopener noreferrer'>Open Material</a></p>" +
+            "<p><strong>Type:</strong> " + (material.file_type || "Not specified") + "</p>" +
+            "<p><strong>Size:</strong> " + sizeText + "</p>" +
+            links +
             "<button type='button' class='edit-material-button'>Edit</button> " +
             "<button type='button' class='delete-material-button'>Delete</button>";
 
-        item.querySelector(".edit-material-button")
-            .addEventListener("click", () => editMaterial(material));
-
-        item.querySelector(".delete-material-button")
-            .addEventListener("click", () => deleteMaterial(material));
-
+        item.querySelector(".edit-material-button").addEventListener("click", () => editMaterial(material));
+        item.querySelector(".delete-material-button").addEventListener("click", () => deleteMaterial(material));
         container.appendChild(item);
-    });
+    }
+}
+
+function formatFileSize(bytes) {
+    const n = Number(bytes);
+    if (!Number.isFinite(n) || n < 0) return "Unknown";
+    if (n < 1024) return n + " B";
+    if (n < 1024 * 1024) return (n / 1024).toFixed(1) + " KB";
+    if (n < 1024 * 1024 * 1024) return (n / (1024 * 1024)).toFixed(1) + " MB";
+    return (n / (1024 * 1024 * 1024)).toFixed(2) + " GB";
 }
 
 async function editMaterial(material) {
@@ -694,11 +715,9 @@ async function uploadMaterial() {
         return;
     }
 
-    const { data: publicUrlData } = supabaseClient.storage
-        .from("course-materials")
-        .getPublicUrl(filePath);
-
-    const fileUrl = publicUrlData.publicUrl;
+    // course-materials is a private bucket.
+    // Store the Storage path; dashboards create signed URLs when opening it.
+    const fileUrl = filePath;
 
     const { error: insertError } = await supabaseClient
         .from("course_materials")
@@ -707,7 +726,8 @@ async function uploadMaterial() {
             title,
             description,
             file_url: fileUrl,
-            file_type: file.type
+            file_type: file.type,
+            file_size: file.size
         });
 
     if (insertError) {

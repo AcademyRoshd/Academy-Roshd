@@ -1180,6 +1180,17 @@ async function loadClasses() {
     }
 
     classesCache = result.data || [];
+
+    var capacityResult = await supabaseClient
+        .from("class_capacity_summary")
+        .select("id, capacity, approved_students, remaining_seats, registration_status");
+
+    if (capacityResult.error) {
+        console.error("Capacity summary loading error:", capacityResult.error);
+    }
+
+    var capacitySummary = capacityResult.data || [];
+
     updateClassSelects();
 
     if (classesCache.length === 0) {
@@ -1193,6 +1204,23 @@ async function loadClasses() {
         var card = document.createElement("div");
         card.className = "data-item";
 
+        var capacity = capacitySummary.find(function(summary) {
+            return Number(summary.id) === Number(item.id);
+        });
+
+        var capacityHtml = "<br><strong>Capacity:</strong> " +
+            escapeHtml(item.capacity === null ? "No limit set" : item.capacity);
+
+        if (capacity && capacity.capacity !== null) {
+            capacityHtml +=
+                "<br><strong>Approved students:</strong> " +
+                escapeHtml(capacity.approved_students) +
+                " / " +
+                escapeHtml(capacity.capacity) +
+                "<br><strong>Seats remaining:</strong> " +
+                escapeHtml(capacity.remaining_seats);
+        }
+
         card.innerHTML =
             "<strong>" + escapeHtml(item.name) + "</strong>" +
             (item.level ? " — " + escapeHtml(item.level) : "") +
@@ -1202,7 +1230,7 @@ async function loadClasses() {
             "<br><strong>Duration:</strong> " + escapeHtml(item.duration || "Not provided") +
             "<br><strong>Instructor:</strong> " + escapeHtml(item.instructor_name || "Not assigned") +
             "<br><strong>Platform:</strong> " + escapeHtml(item.platform || "Not provided") +
-            "<br><strong>Capacity:</strong> " + escapeHtml(item.capacity === null ? "Not set" : item.capacity) +
+            capacityHtml +
             "<br><strong>Start:</strong> " + escapeHtml(formatDate(item.start_date)) +
             "<br><strong>End:</strong> " + escapeHtml(formatDate(item.end_date)) +
             (item.description ? "<br><strong>Description:</strong> " + escapeHtml(item.description) : "") +
