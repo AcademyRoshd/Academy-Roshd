@@ -226,7 +226,7 @@
             reviews.forEach(row => {
                 const item = document.createElement('div');
                 item.classList.add("comment-item");
-                item.innerHTML = "<h4>" + escapeHTML(row.student_name || "") + "</h4><p>" + escapeHTML(row.review_text || "") + "</p>";
+                item.innerHTML = "<h4>" + escapeHTML(String(row.student_name || "")) + "</h4><p>" + escapeHTML(String(row.review_text || "")) + "</p>";
                 container.appendChild(item);
             });
         }
