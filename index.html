@@ -5,12 +5,243 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Roshd Academy | Online Classes for Afghan Girls</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+    .english-ad-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 99999;
+        background: rgba(8, 20, 45, 0.82);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 16px;
+        box-sizing: border-box;
+    }
+
+    .english-ad-popup {
+        position: relative;
+        width: min(100%, 480px);
+        max-height: 94vh;
+        overflow-y: auto;
+        background: #ffffff;
+        border-radius: 18px;
+        padding: 10px;
+        box-sizing: border-box;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+    }
+
+    .english-ad-image {
+        display: block;
+        width: 100%;
+        height: auto;
+        max-height: 82vh;
+        object-fit: contain;
+        border-radius: 12px;
+    }
+
+    .english-ad-close {
+        position: absolute;
+        top: 14px;
+        right: 14px;
+        z-index: 2;
+        width: 40px;
+        height: 40px;
+        border: none;
+        border-radius: 50%;
+        background: #173d70;
+        color: #ffffff;
+        font-size: 26px;
+        cursor: pointer;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+    }
+
+    .english-ad-whatsapp {
+        display: block;
+        margin-top: 10px;
+        padding: 13px;
+        border-radius: 10px;
+        background: #168b55;
+        color: #ffffff;
+        text-align: center;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    @media (max-width: 600px) {
+        .english-ad-popup {
+            width: 100%;
+            max-width: 420px;
+            padding: 7px;
+            border-radius: 14px;
+        }
+
+        .english-ad-image {
+            max-height: 76vh;
+        }
+    }
+    .english-ad-course-card {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    margin: 30px 0;
+    padding: 25px;
+    border-radius: 22px;
+    background: linear-gradient(135deg, #102b50, #1d4d7c);
+    color: #ffffff;
+    box-shadow: 0 12px 35px rgba(16, 43, 80, 0.2);
+    overflow: hidden;
+}
+
+.english-ad-course-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.english-ad-badge {
+    display: inline-block;
+    padding: 8px 12px;
+    margin-bottom: 12px;
+    border-radius: 30px;
+    background: #f4c95d;
+    color: #173454;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.english-ad-course-content h3 {
+    color: #ffffff;
+    font-size: 25px;
+    line-height: 1.4;
+    margin: 8px 0 12px;
+}
+
+.english-ad-course-content p {
+    color: #e4edf7;
+    line-height: 1.8;
+}
+
+.english-ad-course-details {
+    display: grid;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.english-ad-course-details span {
+    display: block;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+
+.english-ad-course-note {
+    font-size: 14px;
+}
+
+.english-ad-course-button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 13px 20px;
+    border-radius: 12px;
+    background: #20a464;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    text-align: center;
+    transition: background 0.2s ease;
+}
+
+.english-ad-course-button:hover {
+    background: #16834f;
+}
+
+.english-ad-course-image {
+    width: 240px;
+    max-width: 42%;
+    height: auto;
+    display: block;
+    border-radius: 15px;
+    object-fit: contain;
+    background: #ffffff;
+}
+
+@media (max-width: 650px) {
+    .english-ad-course-card {
+        flex-direction: column-reverse;
+        align-items: stretch;
+        gap: 18px;
+        padding: 16px;
+        margin: 22px 0;
+    }
+
+    .english-ad-course-image {
+        width: 100%;
+        max-width: 100%;
+        max-height: 440px;
+        object-fit: contain;
+    }
+
+    .english-ad-course-content h3 {
+        font-size: 21px;
+    }
+
+    .english-ad-course-button {
+        display: block;
+        width: auto;
+    }
+}
+</style>
 
     <!-- Supabase Library -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
+     <div class="english-ad-overlay" id="english-ad-overlay">
 
+    <div class="english-ad-popup">
+
+        <button
+            class="english-ad-close"
+            id="english-ad-close"
+            aria-label="Close advertisement">
+            ×
+        </button>
+
+        <img
+            src="english-ad.jpg"
+            alt="آگهی ثبت‌نام صنف زبان انگلیسی آکادمی رشد"
+            class="english-ad-image">
+
+        <div class="english-ad-caption">
+            <p>
+                📚✏️ آغاز ثبت‌نام صنف زبان انگلیسی با متدهای آموزشی روز!
+            </p>
+
+            <p>🎉 ثبت‌نام آغاز شد!</p>
+
+            <p>
+                🔹 سطح صنف: مبتدی، از صفر<br>
+                🔹 مدت آموزش: سه ماه<br>
+                🔹 فیس ماهانه: ۱۰۰ افغانی<br>
+                🔹 مجموع فیس: ۳۰۰ افغانی<br>
+                🔹 امکان پرداخت ماهانه یا یک‌جا
+            </p>
+
+            <p>
+                ⭕️ ظرفیت محدود است؛ پیش از ثبت‌نام، بنر را به‌دقت مطالعه کنید.
+            </p>
+
+            <a
+                href="https://wa.me/93799544349?text=سلام،%20می‌خواهم%20برای%20صنف%20زبان%20انگلیسی%20آکادمی%20رشد%20ثبت‌نام%20کنم."
+                target="_blank"
+                rel="noopener noreferrer"
+                class="english-ad-whatsapp">
+                💬 ثبت‌نام از طریق واتساپ
+            </a>
+        </div>
+
+    </div>
+</div>
     <!-- Header Section -->
     <header>
         <div class="logo-container">
@@ -61,6 +292,45 @@
     <!-- Online Classes Section -->
 <section id="courses" class="container">
     <h2 class="section-title">Our Online Courses</h2>
+
+      <div id="english-ad-course-card" class="english-ad-course-card">
+
+    <div class="english-ad-course-content">
+        <span class="english-ad-badge">📢 SPECIAL ANNOUNCEMENT</span>
+
+        <h3>📚 English Language — Beginner</h3>
+
+        <p>
+            Registration is now open! Join our beginner English class
+            and start learning from zero.
+        </p>
+
+        <div class="english-ad-course-details">
+            <span>🗓️ Duration: 3 Months</span>
+            <span>💰 Fee: 100 AFN per month</span>
+            <span>💵 Total: 300 AFN</span>
+            <span>💻 Online Class</span>
+        </div>
+
+        <p class="english-ad-course-note">
+            Limited seats available. Payment can be monthly or in full.
+        </p>
+
+        <a
+            href="https://wa.me/93799544349?text=Hello%2C%20I%20want%20to%20register%20for%20the%20beginner%20English%20class%20at%20Roshd%20Academy."
+            target="_blank"
+            rel="noopener noreferrer"
+            class="english-ad-course-button">
+            💬 Register via WhatsApp
+        </a>
+    </div>
+
+    <img
+        src="english-ad.jpg"
+        alt="Roshd Academy beginner English class announcement"
+        class="english-ad-course-image">
+
+</div>
 
     <div class="courses-grid" id="courses-grid">
         <!-- Classes will be loaded from Supabase -->
@@ -592,6 +862,36 @@ document.querySelector('.banner-search-input').addEventListener('input', functio
         }
     }
 });
+    (function() {
+
+    var overlay = document.getElementById("english-ad-overlay");
+    var closeButton = document.getElementById("english-ad-close");
+
+    if (!overlay || !closeButton) {
+        return;
+    }
+
+    var startDate = new Date("2026-10-27T09:35:00+04:30");
+    var endDate = new Date(startDate.getTime() + 7 * 24 * 60 * 60 * 1000);
+    var now = new Date();
+
+    if (now >= startDate && now < endDate) {
+        overlay.style.display = "flex";
+    } else {
+        overlay.style.display = "none";
+    }
+
+    closeButton.addEventListener("click", function() {
+        overlay.style.display = "none";
+    });
+
+    overlay.addEventListener("click", function(event) {
+        if (event.target === overlay) {
+            overlay.style.display = "none";
+        }
+    });
+
+})();
     </script>
 </body>
 </html>
